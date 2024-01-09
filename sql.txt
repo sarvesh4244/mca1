@@ -1,0 +1,76 @@
+CREATE TABLE Persons (
+    PersonID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Age INT CHECK (Age >= 0),
+    UNIQUE (FirstName, LastName)
+);
+
+INSERT INTO Persons (PersonID, FirstName, LastName, Age)
+VALUES (1, 'John', 'Doe', 25),
+       (2, 'Jane', 'Smith', 30),
+       (3, 'Bob', 'Johnson', 17);
+UPDATE Persons
+SET Age = 18
+WHERE LastName = 'Johnson';
+
+
+DELETE FROM Persons
+WHERE Age < 18;
+
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    PersonID INT,
+    OrderDate DATE,
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+
+
+ALTER TABLE Persons
+ADD CONSTRAINT uc_Person UNIQUE (FirstName, LastName);
+
+
+SELECT *
+FROM Persons
+WHERE Age < 18;
+
+
+
+
+
+
+
+
+
+
+last time mid sem 
+-- Create the VOTER table
+CREATE TABLE VOTER (
+    VoterID INT PRIMARY KEY,
+    VoterName VARCHAR(50) NOT NULL,
+    Age INT CHECK (Age >= 18),
+    Address VARCHAR(100),
+    ConstituencyNumber INT,
+    ConstituencyName VARCHAR(50),
+    UNIQUE (VoterName),
+    CHECK (ConstituencyNumber > 0)
+);
+
+-- Insert 15 records into the VOTER table
+INSERT INTO VOTER (VoterID, VoterName, Age, Address, ConstituencyNumber, ConstituencyName)
+VALUES 
+    (1, 'John Doe', 25, '123 Main St', 1, 'City A'),
+    (2, 'Jane Smith', 30, '456 Oak St', 2, 'City B'),
+    -- Add more records as needed...
+
+    (15, 'Alice Johnson', 22, '789 Pine St', 3, 'City C');
+
+-- Update voter name to 'LALA' where votername is 'Rohit'
+UPDATE VOTER
+SET VoterName = 'LALA'
+WHERE VoterName = 'Rohit';
+
+-- Delete the record where voter id is 5
+DELETE FROM VOTER
+WHERE VoterID = 5;
